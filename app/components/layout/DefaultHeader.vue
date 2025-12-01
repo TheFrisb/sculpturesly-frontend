@@ -1,8 +1,10 @@
 <script setup lang="ts">
-	import {ref} from 'vue';
-	import {LucideSearch, LucideShoppingBag} from 'lucide-vue-next';
+
+	import SideCart from "~/components/sidecart/SideCart.vue";
 
 	const {categories} = useCategories();
+	const {cart, openCart, _initMockCart} = useCart();
+	_initMockCart()
 
 	const isCollectionOpen = ref(false);
 	let hoverTimer: NodeJS.Timeout | null = null;
@@ -100,10 +102,16 @@
 					<LucideSearch :size="20"/>
 				</button>
 				<button
-						aria-label="Shopping Bag, 0 items"
+						:aria-label="`Shopping Bag, ${cart?.total_items || 0} items`"
 						class="hover:text-clay-500 transition-colors duration-300 relative group"
+						@click="openCart"
 				>
 					<LucideShoppingBag :size="22"/>
+					<span
+							v-if="cart && cart?.items.length > 0"
+							class="absolute -top-2 -right-2 w-4 h-4 bg-clay-500 rounded-full flex items-center justify-center text-[9px] text-white font-sans">
+						{{ cart.items.length }}
+					</span>
 				</button>
 			</div>
 		</div>
@@ -183,6 +191,7 @@
 
 		<ClientOnly>
 			<MenuSidebarPanel/>
+			<SideCart/>
 		</ClientOnly>
 
 	</header>
