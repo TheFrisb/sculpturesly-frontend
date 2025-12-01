@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Inter", sans-serif;
+    --font-serif: "Playfair Display", serif;
+    --font-script: "Pinyon Script", cursive;
+
+    --color-gallery-50: #FDFCF8;
+    --color-gallery-100: #F5F2EB;
+    --color-gallery-200: #E6E2D8;
+    --color-gallery-300: #D4CDC1;
+    --color-gallery-400: #AFA698;
+    --color-gallery-500: #8C8478;
+    --color-gallery-600: #6B6358;
+    --color-gallery-800: #3D3A36;
+    --color-gallery-900: #23211F;
+
+    --color-clay-300: #C7B2AA;
+    --color-clay-400: #A38F85;
+    --color-clay-500: #947E74;
+    --color-clay-600: #756560;
+
+    --animate-fade-in-up: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-fade-in: fadeIn 1.5s ease-out forwards;
+    --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
