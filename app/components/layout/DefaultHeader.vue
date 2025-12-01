@@ -9,11 +9,7 @@
 		<div
 				class="max-w-[1600px] mx-auto px-6 md:px-12 py-6 md:py-8 flex items-center justify-between h-full relative z-50">
 			<div class="flex md:hidden items-center space-x-5 z-50 text-gallery-900">
-				<button
-						class="focus:outline-none hover:text-clay-500 transition-colors" aria-label="Open Menu"
-						aria-expanded="false">
-					<LucideMenu :size="24"/>
-				</button>
+				<MenuSidebarButton/>
 				<button aria-label="Open Search" class="hover:text-clay-500 transition-colors">
 					<LucideSearch :size="22"/>
 				</button>
@@ -64,7 +60,7 @@
 				<button
 						aria-label="Shopping Bag, 0 items"
 						class="hover:text-clay-500 transition-colors duration-300 relative group">
-					<LucideSearch :size="22"/>
+					<LucideShoppingBag :size="22"/>
 				</button>
 			</div>
 		</div>
@@ -200,5 +196,7 @@
 				</a>
 			</div>
 		</div>
+
+		<MenuSidebarPanel/>
 	</header>
 </template>
