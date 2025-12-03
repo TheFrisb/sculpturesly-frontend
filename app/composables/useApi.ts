@@ -3,10 +3,14 @@ export const useAPI = <T>(
     options: any = {}
 ) => {
     const config = useRuntimeConfig()
+    const baseURL = import.meta.server
+        ? config.apiInternal
+        : ''
+
     const headers = useRequestHeaders(['cookie'])
 
     return useFetch<T>(url, {
-        baseURL: config.public.apiBase as string,
+        baseURL: baseURL,
         credentials: 'include',
         ...options,
 
