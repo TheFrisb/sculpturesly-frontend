@@ -11,6 +11,7 @@ export default defineNuxtConfig({
         '@nuxt/hints',
         '@nuxt/scripts',
         'nuxt-lucide-icons',
+        'nuxt-keen-slider'
     ],
 
     css: ['./app/assets/css/tailwind.css'],
@@ -23,7 +24,7 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            apiBase: '', // Empty strings will lookup the env key
+            apiBase: '',
         },
     },
 })

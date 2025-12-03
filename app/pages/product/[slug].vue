@@ -1,85 +1,133 @@
 <script setup lang="ts">
+const route = useRoute();
+const slug = route.params.slug as string;
 
+const {fetchProduct} = useProducts();
+const {addToCart, isCartOpen} = useCart();
+
+const {data: product, error, status} = await fetchProduct(slug);
+
+if (error.value?.statusCode === 404 || !product.value) {
+	throw createError({
+		statusCode: 404,
+		statusMessage: 'Product not found',
+		fatal: true
+	});
+}
+
+useHead({
+	title: product.value ? `${product.value.title} | Sculpturesly` : 'Object',
+	meta: [
+		{name: 'description', content: product.value?.description || 'View this exclusive sculpture.'}
+	]
+});
+
+const quantity = ref(1);
+const activeAccordion = ref<string | null>('story');
+
+const increment = () => quantity.value++;
+const decrement = () => {
+	if (quantity.value > 1) quantity.value--;
+};
+
+const handleAddToCart = async () => {
+	if (!product.value) return;
+
+	const variantId = product.value.variants?.[0]?.id;
+
+	if (variantId) {
+		await addToCart({
+			product_variant_id: variantId,
+			quantity: quantity.value
+		});
+	} else {
+		console.error("No variant ID found for this product");
+	}
+};
+
+const toggleAccordion = (section: string) => {
+	activeAccordion.value = activeAccordion.value === section ? null : section;
+};
 </script>
 
 <template>
 	<div>
-		<article class="w-full bg-gallery-50">
+		<article v-if="product" class="w-full bg-gallery-50">
 			<section class="pt-32 pb-20 max-w-[1800px] mx-auto px-6 md:px-12">
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative">
 					<div class="flex flex-col space-y-12">
-						<div class="w-full bg-gallery-200 overflow-hidden relative group"><img
-								alt="The Weight of Silence"
-								class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-[1.02]"
-								itemprop="image"
-								src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&amp;w=800&amp;auto=format&amp;fit=crop">
+						<div class="w-full bg-gallery-200 overflow-hidden relative group">
+							<img
+									:alt="product.title"
+									class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-[1.02]"
+									:src="product.thumbnail"
+							>
 						</div>
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="w-full aspect-[4/5] bg-gallery-200 overflow-hidden"><img
-									alt="Detail shot 1 of The Weight of Silence" class="w-full h-full object-cover grayscale-[0.2]"
-									src="https://images.unsplash.com/photo-1596627889757-5326779d750c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+						<div
+								v-if="product.gallery_images && product.gallery_images.length > 0"
+								class="grid grid-cols-1 md:grid-cols-2 gap-8">
+							<div
+									v-for="img in product.gallery_images.slice(0, 2)"
+									:key="img.id"
+									class="w-full aspect-[4/5] bg-gallery-200 overflow-hidden"
+							>
+								<img
+										:src="img.image"
+										:alt="img.alt_text || product.title"
+										class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
+								>
 							</div>
-							<div class="w-full aspect-[4/5] bg-gallery-200 overflow-hidden"><img
-									alt="Detail shot 2 of The Weight of Silence" class="w-full h-full object-cover grayscale-[0.2]"
-									src="https://images.unsplash.com/photo-1615870025752-0695029e0007?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
-							</div>
-						</div>
-						<div class="w-full py-12 border-t border-gallery-200 flex justify-center items-end space-x-8 opacity-60">
-							<svg height="200" width="60" viewBox="0 0 60 200" class="fill-gallery-400" aria-labelledby="scaleTitle">
-								<title id="scaleTitle">Approximate Scale Representation</title>
-								<circle cx="30" cy="20" r="12"/>
-								<path d="M10,40 Q30,35 50,40 L50,110 L55,190 L35,200 L30,120 L25,200 L5,190 L10,110 Z"/>
-							</svg>
-							<div class="bg-gallery-800 w-24 h-[106px] opacity-80 rounded-sm"/>
-							<span class="font-sans text-[10px] uppercase tracking-widest text-gallery-500 absolute mb-[-20px]">Approx. Scale</span>
 						</div>
 					</div>
 					<div class="relative h-full">
 						<div class="lg:sticky lg:top-32 flex flex-col h-full max-w-xl">
-							<header class="mb-10 animate-fade-in-up"><h2
-									class="font-sans text-xs tracking-[0.25em] uppercase text-gallery-500 mb-4" itemprop="brand">Elara
-								Vance</h2>
+							<header class="mb-10 animate-fade-in-up">
+								<h2 class="font-sans text-xs tracking-[0.25em] uppercase text-gallery-500 mb-4" itemprop="brand">
+									zaza
+								</h2>
 								<h1
-										class="font-serif text-4xl md:text-5xl lg:text-6xl text-gallery-900 mb-6 leading-tight"
-										itemprop="name">The Weight of Silence</h1>
-								<p class="font-sans text-xs uppercase tracking-[0.2em] text-clay-500 mb-2">Original Artwork — 1 of 1</p>
-								<p
-										class="font-sans text-xl text-gallery-600 font-light" itemprop="offers">
-									<span itemprop="price" content="4500">$4,500</span>
-									<link itemprop="availability" href="http://schema.org/InStock">
+										class="font-serif text-4xl md:text-5xl lg:text-6xl text-gallery-900 mb-6 leading-tight">
+									{{ product.title }}
+								</h1>
+								<p class="font-sans text-xs uppercase tracking-[0.2em] text-clay-500 mb-2">
+									{{ product.status === 'PUBLISHED' ? 'Original Artwork' : product.status }}
+								</p>
+								<p class="font-sans text-xl text-gallery-600 font-light" itemprop="offers">
+									<span itemprop="price">{{ product.base_price }}</span>
 								</p>
 							</header>
+
 							<div class="mb-8 border-b border-gallery-200 pb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
 								<div class="flex items-center space-x-8 mb-8">
+									<!-- Quantity Selector -->
 									<div class="flex items-center border border-gallery-300 px-4 py-3 space-x-6">
-										<button class="text-gallery-400 hover:text-gallery-900" aria-label="Decrease quantity">
-											<svg
-													xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-													class="lucide lucide-minus" aria-hidden="true">
-												<path d="M5 12h14"/>
-											</svg>
+										<button
+												class="text-gallery-400 hover:text-gallery-900" aria-label="Decrease quantity"
+												@click="decrement">
+											<LucideMinus :size="14"/>
 										</button>
-										<span class="font-sans text-sm text-gallery-900 w-4 text-center">1</span>
-										<button class="text-gallery-400 hover:text-gallery-900" aria-label="Increase quantity">
-											<svg
-													xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-													class="lucide lucide-plus" aria-hidden="true">
-												<path d="M5 12h14"/>
-												<path d="M12 5v14"/>
-											</svg>
+										<span class="font-sans text-sm text-gallery-900 w-4 text-center">{{ quantity }}</span>
+										<button
+												class="text-gallery-400 hover:text-gallery-900" aria-label="Increase quantity"
+												@click="increment">
+											<LucidePlus :size="14"/>
 										</button>
 									</div>
+									<!-- Add to Cart -->
 									<button
-											class="flex-1 bg-clay-500 hover:bg-clay-600 text-white font-sans text-xs uppercase tracking-[0.2em] py-4 transition-all duration-300 shadow-md shadow-clay-900/10 hover:shadow-clay-900/20">
+											class="flex-1 bg-clay-500 hover:bg-clay-600 text-white font-sans text-xs uppercase tracking-[0.2em] py-4 transition-all duration-300 shadow-md shadow-clay-900/10 hover:shadow-clay-900/20"
+											@click="handleAddToCart"
+									>
 										Acquire Art
 									</button>
 								</div>
 								<a
 										href="#"
-										class="block text-center font-serif text-sm italic text-gallery-500 hover:text-clay-500 transition-colors">Ask
-									the Curator a Question</a></div>
+										class="block text-center font-serif text-sm italic text-gallery-500 hover:text-clay-500 transition-colors">
+									Ask the Curator a Question
+								</a>
+							</div>
+
 							<div class="mb-12 animate-fade-in-up" style="animation-delay: 0.2s;">
 								<div class="border-t border-gallery-300">
 									<button class="w-full py-6 flex justify-between items-center text-left group" aria-expanded="false">
@@ -105,15 +153,16 @@
 									</div>
 								</div>
 								<div class="border-t border-gallery-300">
-									<button class="w-full py-6 flex justify-between items-center text-left group" aria-expanded="false">
+									<button
+											class="w-full py-6 flex justify-between items-center text-left group"
+											:aria-expanded="activeAccordion === 'specs'"
+											@click="toggleAccordion('specs')">
 										<span class="font-serif text-lg text-gallery-800 group-hover:text-clay-600 transition-colors">Dimensions &amp; Materials</span>
-										<svg
-												xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-												stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-												class="lucide lucide-chevron-down text-gallery-400 transform transition-transform duration-300"
-												aria-hidden="true">
-											<path d="m6 9 6 6 6-6"/>
-										</svg>
+										<LucideChevronDown
+												:size="20"
+												class="text-gallery-400 transform transition-transform duration-300"
+												:class="{ 'rotate-180': activeAccordion === 'specs' }"
+										/>
 									</button>
 									<div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0">
 										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4">
@@ -129,15 +178,17 @@
 									</div>
 								</div>
 								<div class="border-t border-gallery-300">
-									<button class="w-full py-6 flex justify-between items-center text-left group" aria-expanded="false">
+									<button
+											class="w-full py-6 flex justify-between items-center text-left group"
+											:aria-expanded="activeAccordion === 'shipping'"
+											@click="toggleAccordion('shipping')"
+									>
 										<span class="font-serif text-lg text-gallery-800 group-hover:text-clay-600 transition-colors">Provenance &amp; Shipping</span>
-										<svg
-												xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-												stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-												class="lucide lucide-chevron-down text-gallery-400 transform transition-transform duration-300"
-												aria-hidden="true">
-											<path d="m6 9 6 6 6-6"/>
-										</svg>
+										<LucideChevronDown
+												:size="20"
+												class="text-gallery-400 transform transition-transform duration-300"
+												:class="{ 'rotate-180': activeAccordion === 'shipping' }"
+										/>
 									</button>
 									<div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0">
 										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4"><p class="mb-4">Direct from
@@ -148,30 +199,14 @@
 							</div>
 							<div class="flex items-center justify-start space-x-8 pt-2">
 								<div class="flex items-center space-x-3 group">
-									<svg
-											xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-											stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-											class="lucide lucide-award text-gallery-800" aria-hidden="true">
-										<path
-												d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
-										<circle cx="12" cy="8" r="6"/>
-									</svg>
+									<LucideAward :size="20" class="text-gallery-800"/>
 									<div class="flex flex-col"><h4 class="font-serif text-sm text-gallery-900">Authenticity</h4><span
 											class="font-sans text-[10px] text-gallery-500 uppercase tracking-wider">Verified &amp; Signed</span>
 									</div>
 								</div>
 								<div class="w-[1px] h-8 bg-gallery-300/50"/>
 								<div class="flex items-center space-x-3 group">
-									<svg
-											xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-											stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-											class="lucide lucide-truck text-gallery-800" aria-hidden="true">
-										<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
-										<path d="M15 18H9"/>
-										<path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
-										<circle cx="17" cy="18" r="2"/>
-										<circle cx="7" cy="18" r="2"/>
-									</svg>
+									<LucideTruck :size="20" class="text-gallery-800"/>
 									<div class="flex flex-col"><h4 class="font-serif text-sm text-gallery-900">Shipping</h4><span
 											class="font-sans text-[10px] text-gallery-500 uppercase tracking-wider">Insured White-Glove</span>
 									</div>

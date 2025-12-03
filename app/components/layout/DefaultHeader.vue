@@ -3,8 +3,7 @@
 	import SideCart from "~/components/sidecart/SideCart.vue";
 
 	const {categories} = useCategories();
-	const {cart, openCart, _initMockCart} = useCart();
-	_initMockCart()
+	const {cart, openCart} = useCart();
 
 	const isCollectionOpen = ref(false);
 	let hoverTimer: NodeJS.Timeout | null = null;

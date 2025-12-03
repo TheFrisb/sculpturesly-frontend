@@ -1,7 +1,11 @@
 <script setup lang="ts">
-
 import DefaultHeader from "~/components/layout/DefaultHeader.vue";
 import DefaultFooter from "~/components/layout/DefaultFooter.vue";
+const {fetchCart} = useCart();
+
+onMounted(() => {
+	fetchCart();
+});
 </script>
 
 <template>

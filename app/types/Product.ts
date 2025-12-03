@@ -39,7 +39,7 @@ export interface ProductListItem {
     title: string;
     slug: string;
     status: ProductStatus;
-    thumbnail: string | null;
+    thumbnail: string;
     base_price: string;
     category_names: string[];
     created_at: string;
@@ -52,7 +52,7 @@ export interface ProductDetail {
     status: ProductStatus;
     description: string;
     base_price: string;
-    thumbnail: string | null;
+    thumbnail: string;
     specifications: Record<string, never>;
 
     product_type: ProductType;

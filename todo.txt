@@ -1,8 +1,4 @@
-1. Make footer links
-2. Make header links
-3. Make home page
-4. Make product page
-5. Make sidecart
-6. Make checkout
-7. Make thank you
-8. Make collections page
+3. Checkout Page
+4. Thank You Page
+--
+5. Collections page
