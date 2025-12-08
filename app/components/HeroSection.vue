@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {LucideArrowRight} from 'lucide-vue-next'
-import type {ProductListItem} from '~/types/Product'
+import type {ProductListItem} from '~/types/product'
 
 interface FeaturedSectionItem {
 	image: string;

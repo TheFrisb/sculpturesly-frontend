@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import {onMounted, ref, watch} from 'vue';
+
 const route = useRoute();
-const slug = route.params.slug as string;
+const slug = computed(() => route.params.slug as string);
 
 const {fetchProduct} = useProducts();
-const {addToCart, isCartOpen} = useCart();
+const {addToCart} = useCart();
+const {sendViewContentEvent, sendAddToCartEvent} = useFacebookPixel();
 
-const {data: product, error, status} = await fetchProduct(slug);
+const {data: product, error} = await fetchProduct(slug.value);
 
 if (error.value?.statusCode === 404 || !product.value) {
 	throw createError({
@@ -22,6 +25,24 @@ useHead({
 	]
 });
 
+const trackViewContent = () => {
+	if (product.value) {
+		const defaultVariantSku = product.value.variants?.[0]?.sku;
+		sendViewContentEvent(product.value, defaultVariantSku);
+	}
+};
+
+onMounted(() => {
+	trackViewContent();
+});
+
+watch(slug, () => {
+	if (product.value) {
+		trackViewContent();
+	}
+});
+// -----------------------------------------
+
 const quantity = ref(1);
 const activeAccordion = ref<string | null>('story');
 
@@ -33,13 +54,25 @@ const decrement = () => {
 const handleAddToCart = async () => {
 	if (!product.value) return;
 
-	const variantId = product.value.variants?.[0]?.id;
+	const selectedVariant = product.value.variants?.[0];
 
-	if (variantId) {
+	if (selectedVariant) {
+		// 1. Add to Cart (Business Logic)
 		await addToCart({
-			product_variant_id: variantId,
+			product_variant_id: selectedVariant.id,
 			quantity: quantity.value
 		});
+
+		console.log(product.value)
+
+		// 2. Fire Pixel (Tracking Logic)
+		// FIX 2: Pass 'product.value' (full object), NOT 'selectedVariant'
+		sendAddToCartEvent(
+				product.value,      // <--- Requires Full Product Object (for Title)
+				quantity.value,     // Quantity
+				selectedVariant.sku // Variant SKU
+		);
+
 	} else {
 		console.error("No variant ID found for this product");
 	}

@@ -14,6 +14,12 @@ export default defineNuxtConfig({
         'nuxt-keen-slider'
     ],
 
+    scripts: {
+        registry: {
+            metaPixel: true,
+        }
+    },
+
     css: ['./app/assets/css/tailwind.css'],
 
     vite: {
@@ -24,6 +30,14 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         apiInternal: 'http://127.0.0.1:8000',
+
+        public: {
+            scripts: {
+                metaPixel: {
+                    id: '', // NUXT_PUBLIC_SCRIPTS_META_PIXEL_ID
+                },
+            },
+        },
     },
 
     nitro: {

@@ -1,4 +1,4 @@
-import type {ProductDetail, ProductListItem} from '~/types/Product'
+import type {ProductDetail, ProductListItem} from '~/types/product'
 
 interface ProductFetchOptions {
     page?: number

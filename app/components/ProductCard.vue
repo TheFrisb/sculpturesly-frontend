@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {ProductListItem} from '~/types/Product';
+import type {ProductListItem} from '~/types/product';
 
 const props = defineProps<{
 	product: ProductListItem
