@@ -1,8 +1,3 @@
-3. Product page -- 1 hr
--- Ensure price gets rendered
--- Ensure product details get rendered
--- Add rich text editor for product details
-
 4. Facebook catalogue -- 1hr
 
 

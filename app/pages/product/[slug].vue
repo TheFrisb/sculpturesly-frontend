@@ -41,7 +41,6 @@ watch(slug, () => {
 		trackViewContent();
 	}
 });
-// -----------------------------------------
 
 const quantity = ref(1);
 const activeAccordion = ref<string | null>('story');
@@ -57,7 +56,6 @@ const handleAddToCart = async () => {
 	const selectedVariant = product.value.variants?.[0];
 
 	if (selectedVariant) {
-		// 1. Add to Cart (Business Logic)
 		await addToCart({
 			product_variant_id: selectedVariant.id,
 			quantity: quantity.value
@@ -65,12 +63,10 @@ const handleAddToCart = async () => {
 
 		console.log(product.value)
 
-		// 2. Fire Pixel (Tracking Logic)
-		// FIX 2: Pass 'product.value' (full object), NOT 'selectedVariant'
 		sendAddToCartEvent(
-				product.value,      // <--- Requires Full Product Object (for Title)
-				quantity.value,     // Quantity
-				selectedVariant.sku // Variant SKU
+				product.value,
+				quantity.value,
+				selectedVariant.sku
 		);
 
 	} else {
@@ -465,60 +461,9 @@ const toggleAccordion = (section: string) => {
 				</div>
 			</section>
 		</article>
-		<section class="w-full py-24 bg-gallery-50 border-t border-gallery-200">
-			<div class="max-w-[1600px] mx-auto px-6 md:px-12"><h3
-					class="font-serif text-3xl text-gallery-900 mb-12 text-center md:text-left">Curated Pairings</h3>
-				<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-					<div class="md:col-span-2 relative group cursor-pointer">
-						<div class="w-full h-full min-h-[400px] bg-gallery-200 overflow-hidden relative"><img
-								alt="Featured Pairing"
-								class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
-								src="https://images.unsplash.com/photo-1543445330-3629471bb952?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
-							<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"/>
-							<div class="absolute bottom-8 left-8 text-white"><span
-									class="font-sans text-[10px] uppercase tracking-widest block mb-2 opacity-90">Suggested Pairing</span>
-								<h3 class="font-serif text-3xl">The Stone Collection</h3></div>
-						</div>
-					</div>
-					<div class="md:col-span-1">
-						<div class="group mb-12 break-inside-avoid relative cursor-pointer">
-							<div class="relative overflow-hidden mb-4 bg-gallery-100"><img
-									alt="The Silent Void"
-									class="w-full h-auto object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale-[0.2] group-hover:grayscale-0"
-									src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&amp;w=800&amp;auto=format&amp;fit=crop">
-								<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"/>
-							</div>
-							<div class="flex flex-col space-y-1">
-								<div class="flex justify-between items-baseline"><h3
-										class="font-serif text-xl text-gallery-900 group-hover:text-clay-500 transition-colors duration-300">
-									The Silent Void</h3><span class="font-sans text-sm text-gallery-500">$9,500</span></div>
-								<p class="font-sans text-xs uppercase tracking-wider text-gallery-500">Elena Vora</p>
-								<p class="font-sans text-xs text-gallery-400 italic">Carrara Marble, 2023</p></div>
-							<div
-									class="absolute -bottom-4 left-4 right-4 h-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/5 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-						</div>
-					</div>
-					<div class="md:col-span-1">
-						<div class="group mb-12 break-inside-avoid relative cursor-pointer">
-							<div class="relative overflow-hidden mb-4 bg-gallery-100"><img
-									alt="Fragmented Memory"
-									class="w-full h-auto object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale-[0.2] group-hover:grayscale-0"
-									src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&amp;w=800&amp;auto=format&amp;fit=crop">
-								<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"/>
-							</div>
-							<div class="flex flex-col space-y-1">
-								<div class="flex justify-between items-baseline"><h3
-										class="font-serif text-xl text-gallery-900 group-hover:text-clay-500 transition-colors duration-300">
-									Fragmented Memory</h3><span class="font-sans text-sm text-gallery-500">$450</span></div>
-								<p class="font-sans text-xs uppercase tracking-wider text-gallery-500">Davide Russo</p>
-								<p class="font-sans text-xs text-gallery-400 italic">Oxidized Bronze, 2024</p></div>
-							<div
-									class="absolute -bottom-4 left-4 right-4 h-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/5 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+
+		<CuratedPairings/>
+
 	</div>
 </template>
 
