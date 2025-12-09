@@ -151,9 +151,12 @@
 									class="animate-fade-in-up"
 									:style="{ animationDelay: `${(index + 1) * 0.1}s` }"
 							>
-								<h4 class="font-sans text-[10px] uppercase tracking-[0.25em] text-gallery-400 mb-6 border-b border-gallery-200 pb-2">
+								<NuxtLink
+										:to="`/category/${parent.slug}`"
+										class="font-sans text-[10px] uppercase tracking-[0.25em] text-gallery-400 mb-6 border-b border-gallery-200 pb-2"
+										@click="handleLinkClick">
 									{{ parent.title }}
-								</h4>
+								</NuxtLink>
 
 								<ul class="space-y-5">
 									<li v-for="child in parent.children" :key="child.id">

@@ -12,9 +12,10 @@ export const useCart = () => {
     const fetchCart = async () => {
         loading.value = true;
         try {
-            const {data, error} = await useAPI<Cart>('/api/carts/');
-            if (data.value) {
-                cart.value = data.value;
+            const data = await fetchWithDefaults<Cart>('/api/carts/');
+
+            if (data) {
+                cart.value = data;
             }
         } catch (e) {
             console.error('Failed to fetch cart', e);
@@ -26,13 +27,13 @@ export const useCart = () => {
     const addToCart = async (payload: AddToCartPayload) => {
         loading.value = true;
         try {
-            const {data, error} = await useAPI<Cart>('/api/carts/items/', {
+            const data = await fetchWithDefaults<Cart>('/api/carts/items/', {
                 method: 'POST',
                 body: payload
             });
 
-            if (data.value) {
-                cart.value = data.value;
+            if (data) {
+                cart.value = data;
                 openCart();
             }
         } catch (e) {
@@ -45,13 +46,13 @@ export const useCart = () => {
     const updateItemQuantity = async (itemId: number, payload: UpdateCartItemPayload) => {
         loading.value = true;
         try {
-            const {data, error} = await useAPI<Cart>(`/api/carts/${itemId}/update/`, {
+            const data = await fetchWithDefaults<Cart>(`/api/carts/${itemId}/update/`, {
                 method: 'PATCH',
                 body: payload
             });
 
-            if (data.value) {
-                cart.value = data.value;
+            if (data) {
+                cart.value = data;
             }
         } catch (e) {
             console.error('Failed to update item', e);
@@ -63,12 +64,12 @@ export const useCart = () => {
     const removeItem = async (itemId: number) => {
         loading.value = true;
         try {
-            const {data, error} = await useAPI<Cart>(`/api/carts/${itemId}/remove/`, {
+            const data = await fetchWithDefaults<Cart>(`/api/carts/${itemId}/remove/`, {
                 method: 'DELETE'
             });
 
-            if (data.value) {
-                cart.value = data.value;
+            if (data) {
+                cart.value = data;
             }
         } catch (e) {
             console.error('Failed to remove item', e);
@@ -94,4 +95,4 @@ export const useCart = () => {
         removeItem,
         clearCart
     };
-};
+}

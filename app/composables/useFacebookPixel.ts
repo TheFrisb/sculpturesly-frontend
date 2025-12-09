@@ -26,12 +26,8 @@ export const useFacebookPixel = () => {
             proxy.fbq('track', eventName, browserPayload, {eventID: eventID});
         }
 
-        const baseURL = import.meta.client ? '' : config.apiInternal;
-
-        $fetch(apiEndpoint, {
+        fetchWithDefaults(apiEndpoint, {
             method: 'POST',
-            baseURL: baseURL,
-            credentials: 'include',
             body: {
                 ...apiPayload,
                 event_id: eventID,

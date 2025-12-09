@@ -1,4 +1,9 @@
-3. Checkout Page
-4. Thank You Page
---
-5. Collections page
+3. Product page -- 1 hr
+-- Ensure price gets rendered
+-- Ensure product details get rendered
+-- Add rich text editor for product details
+
+4. Facebook catalogue -- 1hr
+
+
+Total: 3:30 hrs
