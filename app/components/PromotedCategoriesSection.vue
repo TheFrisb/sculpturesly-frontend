@@ -34,7 +34,7 @@ const hasData = computed(() => categories.value && categories.value.length >= 3)
 				Unable to load collections.
 			</div>
 
-			<div v-else-if="hasData" class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 h-auto lg:h-[80vh]">
+			<div v-else-if="hasData" class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 h-auto">
 				<NuxtLink
 						:to="`/category/${categories[0].category.slug}`"
 						class="group relative w-full h-[60vh] lg:h-full bg-gallery-200 overflow-hidden cursor-pointer block">

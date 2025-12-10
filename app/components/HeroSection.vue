@@ -86,7 +86,7 @@ const currentSlide = ref(0)
 							<div
 									class="absolute bottom-6 right-6 z-30 hidden md:block transition-opacity duration-1000"
 							>
-								<p class="font-sans text-[10px] uppercase tracking-widest text-white/90 drop-shadow-md">
+								<p class="font-sans text-[10px] uppercase tracking-widest text-black/90 drop-shadow-md">
 									Fig. 0{{ index + 1 }} — {{ item.product.title }}
 								</p>
 							</div>
