@@ -9,6 +9,15 @@ export const useAPI = <T>(
 
     const headers = useRequestHeaders(['cookie'])
 
+    const extraHeaders: Record<string, string> = {}
+
+    if (import.meta.server && config.hostNameHeader) {
+        extraHeaders['Host'] = config.hostNameHeader
+        extraHeaders['X-Forwarded-Proto'] = 'https'
+
+        console.log(config.hostNameHeader)
+    }
+
     return useFetch<T>(url, {
         baseURL: baseURL,
         credentials: 'include',
@@ -17,6 +26,7 @@ export const useAPI = <T>(
         headers: {
             Accept: 'application/json',
             ...headers,
+            ...extraHeaders,
             ...options.headers,
         },
     })
