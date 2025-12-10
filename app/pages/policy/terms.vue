@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Terms of Service - User Agreement | Sculpturesly',
+	description: 'Review the terms and conditions for using the Sculpturesly website. Understanding your rights and responsibilities regarding purchases, intellectual property, and site usage.',
+	url: url.href,
+})))
 </script>
 
 <template>

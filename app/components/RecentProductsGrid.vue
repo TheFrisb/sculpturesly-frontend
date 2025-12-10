@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// 1. Fetch Products
-// We explicitly ask for 8 items, ordered by creation date
 const {fetchProducts} = useProducts();
 
 const {data: response, error, status} = await fetchProducts({
@@ -38,6 +36,7 @@ const isLoading = computed(() => status.value === 'pending');
 			</div>
 
 			<div v-else-if="error" class="py-20 text-center text-red-400 font-sans">
+				{{ error }}
 				Unable to load products at this time.
 			</div>
 

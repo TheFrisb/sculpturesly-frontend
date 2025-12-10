@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Shipping Policy - Delivery, Handling & Rates | Sculpturesly',
+	description: 'Learn about our shipping methods for delicate sculptures. Information on delivery times, international shipping options, and how we package art for safe arrival.',
+	url: url.href,
+})))
 </script>
 
 <template>

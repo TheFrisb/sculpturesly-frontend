@@ -25,6 +25,8 @@ useHead({
 	]
 });
 
+useSeoMeta(resolveSeoTags(() => product.value?.seo_metadata))
+
 const trackViewContent = () => {
 	if (product.value) {
 		const defaultVariantSku = product.value.variants?.[0]?.sku;

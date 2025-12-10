@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Privacy Policy - Data Protection & Security | Sculpturesly',
+	description: 'At Sculpturesly, your privacy is paramount. Read our policy to understand how we protect your personal data, handle cookies, and secure your payment information.',
+	url: url.href,
+})))
 </script>
 
 <template>

@@ -1,4 +1,20 @@
-4. Facebook catalogue -- 1hr
+4. Search functionality
+5. Products
+-- Description
+-- Details rendering
+-- Choose variant logic
+6. Trade form
+7. Newsletter link
+8. Social links
+9. Terms of service, privacy policy, shipping policy
+10. Stripe elements on checkout
+11. Total optimization of frontend
+12. Emails
+13. Collections Filters
+14. Design improvement
+15. Google analytics
 
 
-Total: 3:30 hrs
+1. SEO Tags
+2. Seed products
+3. Optimize loading / SSR & add images

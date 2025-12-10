@@ -6,6 +6,15 @@ definePageMeta({
 	layout: false
 })
 
+const url = useRequestURL();
+
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Secure Checkout | Sculpturesly',
+	description: 'Finalize your art acquisition securely. We offer encrypted payment processing and white-glove shipping options for your peace of mind.',
+	robots: 'noindex, nofollow',
+	url: url.href,
+})))
+
 const {cart} = useCart();
 
 // --- STATE ---

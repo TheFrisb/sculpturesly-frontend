@@ -1,4 +1,5 @@
 import type {Category} from './category';
+import type {SeoTags} from "~/types/seo";
 
 export type ProductStatus = 'DRAFT' | 'ARCHIVED' | 'PUBLISHED';
 
@@ -54,9 +55,9 @@ export interface ProductDetail {
     base_price: string;
     thumbnail: string;
     specifications: Record<string, never>;
-
     product_type: ProductType;
     categories: Category[];
     variants: ProductVariant[];
     gallery_images: ProductGalleryImage[];
+    seo_metadata: SeoTags;
 }

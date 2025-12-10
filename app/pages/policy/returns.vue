@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Returns & Refund Policy - Satisfaction Guarantee | Sculpturesly',
+	description: 'Shop art with confidence. View Sculpturesly\'s return guidelines, refund timelines, and how we handle returns for damaged or unsuitable items.',
+	url: url.href,
+})))
 </script>
 
 <template>

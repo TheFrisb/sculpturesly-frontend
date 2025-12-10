@@ -9,9 +9,7 @@ const nextPage = ref<string | null>(null);
 const isLoading = ref(false);
 const totalCount = ref(0);
 
-const categoryTitle = computed(() => {
-	return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-});
+const {data: category} = await useCategory(route.params.slug)
 
 interface PaginatedProductResponse {
 	count: number;
@@ -75,17 +73,15 @@ const fetchProducts = async (isLoadMore = false) => {
 await fetchProducts();
 
 // SEO
-useHead({
-	title: `${categoryTitle.value} | Sculpturesly`,
-	meta: [{name: 'description', content: `Browse our exclusive ${categoryTitle.value} collection.`}]
-});
+useSeoMeta(resolveSeoTags(() => category.value?.seo_metadata))
+
 </script>
 
 <template>
 	<div class="w-full bg-gallery-50 min-h-screen pt-32 pb-20">
 		<div class="max-w-[1600px] mx-auto px-6 md:px-12 mb-12">
 			<h1 class="font-serif text-5xl md:text-6xl text-gallery-900 mb-4">
-				{{ categoryTitle }}
+				{{ category?.title }}
 			</h1>
 			<p class="font-sans text-gallery-500 text-sm tracking-wide">
 				Found {{ totalCount }} works.

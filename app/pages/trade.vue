@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Trade Program - Exclusive Art for Designers & Architects | Sculpturesly',
+	description: 'Step inside the Sculpturesly Studio. Explore our design process, view gallery-worthy styling ideas, and discover the stories behind our latest artistic collections.',
+	url: url.href,
+})))
 </script>
 
 <template>

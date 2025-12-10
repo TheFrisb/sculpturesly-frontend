@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Sculpturesly: Modern Sculptures, Statues & Artistic Home Deco',
+	description: 'Elevate your space with Sculpturesly. Shop our curated collection of handcrafted sculptures, garden statues, and modern art pieces. Discover timeless design today.',
+	url: url.href,
+})))
 </script>
 
 <template>

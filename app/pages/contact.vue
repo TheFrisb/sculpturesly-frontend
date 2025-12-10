@@ -1,5 +1,11 @@
 <script setup lang="ts">
+const url = useRequestURL();
 
+useSeoMeta(buildSeoMeta(() => ({
+	title: 'Contact Sculpturesly - Customer Support & Art Inquiries',
+	description: 'Need help selecting the perfect piece? Have a question about shipping or custom orders? Contact the Sculpturesly team via email or phone for expert assistance.',
+	url: url.href,
+})))
 </script>
 
 <template>
