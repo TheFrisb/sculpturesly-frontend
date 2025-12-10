@@ -29,8 +29,7 @@ export default defineNuxtConfig({
     },
 
     runtimeConfig: {
-        apiInternal: 'http://127.0.0.1:8000',
-        hostNameHeader: '', // NUXT_HOST_NAME_HEADER
+        apiInternal: '',
 
         public: {
             scripts: {

@@ -11,13 +11,6 @@ export const useAPI = <T>(
 
     const extraHeaders: Record<string, string> = {}
 
-    if (import.meta.server && config.hostNameHeader) {
-        extraHeaders['Host'] = config.hostNameHeader
-        extraHeaders['X-Forwarded-Proto'] = 'https'
-
-        console.log(config.hostNameHeader)
-    }
-
     return useFetch<T>(url, {
         baseURL: baseURL,
         credentials: 'include',
