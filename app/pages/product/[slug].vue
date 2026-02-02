@@ -55,12 +55,37 @@ watch(slug, () => {
 });
 
 const quantity = ref(1);
-const activeAccordion = ref<string | null>('story');
+const activeAccordion = ref<string | null>('specs');
 
 const increment = () => quantity.value++;
 const decrement = () => {
 	if (quantity.value > 1) quantity.value--;
 };
+
+const variantAttributes = computed(() => product.value?.variants?.[0]?.attributes || {});
+const allowedAttributes = computed(() => product.value?.product_type?.allowed_attributes || []);
+
+const specAttributes = computed(() => {
+    const ignoredSlugs = ['gross-weight', 'pieces-per-carton', 'pieces-per-set'];
+    return allowedAttributes.value
+        .filter(attr => !ignoredSlugs.includes(attr.slug))
+        .map(attr => ({
+            name: attr.name,
+            value: variantAttributes.value[attr.slug]
+        }))
+        .filter(item => item.value);
+});
+
+const shippingAttributes = computed(() => {
+    const targetSlugs = ['gross-weight', 'pieces-per-carton', 'pieces-per-set'];
+    return allowedAttributes.value
+        .filter(attr => targetSlugs.includes(attr.slug))
+        .map(attr => ({
+             name: attr.name,
+             value: variantAttributes.value[attr.slug]
+        }))
+        .filter(item => item.value);
+});
 
 const handleAddToCart = async () => {
 	if (!product.value) return;
@@ -138,7 +163,7 @@ const toggleAccordion = (section: string) => {
 								</p>
 							</header>
 
-							<div class="mb-8 border-b border-gallery-200 pb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+							<div class="border-gallery-200 pb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
 								<div class="flex items-center space-x-8 mb-8">
 									<!-- Quantity Selector -->
 									<div class="flex items-center border border-gallery-300 px-4 py-3 space-x-6">
@@ -162,37 +187,9 @@ const toggleAccordion = (section: string) => {
 										Acquire Art
 									</button>
 								</div>
-								<a
-										href="#"
-										class="block text-center font-serif text-sm italic text-gallery-500 hover:text-clay-500 transition-colors">
-									Ask the Curator a Question
-								</a>
 							</div>
 
 							<div class="mb-12 animate-fade-in-up" style="animation-delay: 0.2s;">
-								<div class="border-t border-gallery-300">
-									<button class="w-full py-6 flex justify-between items-center text-left group" aria-expanded="false">
-										<span class="font-serif text-lg text-gallery-800 group-hover:text-clay-600 transition-colors">The Story</span>
-										<svg
-												xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-												stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-												class="lucide lucide-chevron-down text-gallery-400 transform transition-transform duration-300"
-												aria-hidden="true">
-											<path d="m6 9 6 6 6-6"/>
-										</svg>
-									</button>
-									<div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0">
-										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4"><p
-												class="mb-4"
-												itemprop="description">A
-											study in balance and negative space. "The Weight of Silence" explores the physical presence of
-											what is left unsaid. Vance uses the lost-wax casting technique to create a form that feels both
-											ancient and aggressively modern. The patina is developed over three weeks using a proprietary
-											mixture of oxides.</p>
-											<p>This piece captures the fleeting moment between thought and action, solidified in bronze
-												forever.</p></div>
-									</div>
-								</div>
 								<div class="border-t border-gallery-300">
 									<button
 											class="w-full py-6 flex justify-between items-center text-left group"
@@ -205,16 +202,15 @@ const toggleAccordion = (section: string) => {
 												:class="{ 'rotate-180': activeAccordion === 'specs' }"
 										/>
 									</button>
-									<div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0">
+									<div class="overflow-hidden transition-all duration-500 ease-in-out" :class="activeAccordion === 'specs' ? 'max-h-[500px] opacity-100 pb-6' : 'max-h-0 opacity-0'">
 										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4">
-											<div class="flex items-center space-x-4 mb-4">
-												<div
-														class="w-8 h-8 rounded-full bg-[url('https://images.unsplash.com/photo-1596627889757-5326779d750c?q=80&amp;w=200&amp;auto=format&amp;fit=crop')] bg-cover shadow-inner"/>
-												<span class="text-gallery-900 font-medium" itemprop="material">Cast Bronze</span></div>
-											<ul class="space-y-2 text-gallery-500">
-												<li>Dimensions: H 42cm x W 28cm x D 15cm</li>
-												<li>Weight: 12.4 kg</li>
-											</ul>
+											<div v-if="specAttributes.length > 0" class="space-y-4">
+                                                <div v-for="attr in specAttributes" :key="attr.name" class="flex justify-between border-b border-gallery-200 pb-2 last:border-0">
+                                                    <span class="text-gallery-500 uppercase tracking-widest text-xs">{{ attr.name }}</span>
+                                                    <span class="text-gallery-900 font-medium">{{ attr.value }}</span>
+                                                </div>
+                                            </div>
+                                            <p v-else class="italic text-gallery-400">No specifications available.</p>
 										</div>
 									</div>
 								</div>
@@ -231,10 +227,18 @@ const toggleAccordion = (section: string) => {
 												:class="{ 'rotate-180': activeAccordion === 'shipping' }"
 										/>
 									</button>
-									<div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0">
-										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4"><p class="mb-4">Direct from
-											Artist Studio, Copenhagen. Series 1 of 5.</p>
-											<p>Ships in a custom-built wooden crate via White Glove service. Fully insured.</p></div>
+									<div class="overflow-hidden transition-all duration-500 ease-in-out" :class="activeAccordion === 'shipping' ? 'max-h-[500px] opacity-100 pb-6' : 'max-h-0 opacity-0'">
+										<div class="font-sans text-sm text-gallery-600 leading-relaxed pr-4">
+                                            <p class="mb-4">Direct from Artist Studio. Fully authentic.</p>
+											<p class="mb-4">Ships in a custom-built crate via White Glove service. Fully insured.</p>
+                                            
+                                            <div v-if="shippingAttributes.length > 0" class="mt-6 pt-4 border-t border-gallery-200 space-y-2">
+                                                <div v-for="attr in shippingAttributes" :key="attr.name" class="flex justify-between">
+                                                    <span class="text-gallery-500 text-xs uppercase tracking-wider">{{ attr.name }}:</span>
+                                                    <span class="text-gallery-800 text-xs font-medium">{{ attr.value }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
 									</div>
 								</div>
 							</div>
