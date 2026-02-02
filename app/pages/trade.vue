@@ -29,9 +29,13 @@ useSeoMeta(buildSeoMeta(() => ({
 					</button>
 				</div>
 			</div>
-			<div class="w-full md:w-1/2 h-[50vh] md:h-auto bg-gallery-200 order-1 md:order-2 relative overflow-hidden"><img
+			<div class="w-full md:w-1/2 h-[50vh] md:h-auto bg-gallery-200 order-1 md:order-2 relative overflow-hidden"><NuxtImg
 					alt="Interior Design Mood" class="w-full h-full object-cover filter contrast-[0.9] saturate-[0.8]"
-					src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+					src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                    format="webp"
+                    sizes="100vw md:50vw"
+                    loading="lazy"
+            />
 				<div class="absolute inset-0 bg-gallery-900/10 mix-blend-multiply"/>
 			</div>
 		</section>
@@ -115,28 +119,40 @@ useSeoMeta(buildSeoMeta(() => ({
 			</div>
 			<div class="flex overflow-x-auto space-x-8 px-6 md:px-12 pb-12 no-scrollbar">
 				<div class="min-w-[80vw] md:min-w-[45vw] lg:min-w-[30vw] flex-shrink-0 group cursor-pointer">
-					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><img
+					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><NuxtImg
 							alt="Luxury Hotel Lobby"
 							class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105 filter contrast-[0.95]"
-							src="https://images.unsplash.com/photo-1590353836367-9d7a26ce4001?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1590353836367-9d7a26ce4001?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:33vw"
+                            loading="lazy"
+                    />
 						<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"/>
 					</div>
 					<h4 class="font-serif text-xl text-gallery-900 mb-1">The Aman Kyoto</h4>
 					<p class="font-sans text-xs text-gallery-500 uppercase tracking-wider">Lobby Installation</p></div>
 				<div class="min-w-[80vw] md:min-w-[45vw] lg:min-w-[30vw] flex-shrink-0 group cursor-pointer">
-					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><img
+					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><NuxtImg
 							alt="Private Residence Paris"
 							class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105 filter contrast-[0.95]"
-							src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:33vw"
+                            loading="lazy"
+                    />
 						<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"/>
 					</div>
 					<h4 class="font-serif text-xl text-gallery-900 mb-1">Private Residence, Paris</h4>
 					<p class="font-sans text-xs text-gallery-500 uppercase tracking-wider">Living Room Collection</p></div>
 				<div class="min-w-[80vw] md:min-w-[45vw] lg:min-w-[30vw] flex-shrink-0 group cursor-pointer">
-					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><img
+					<div class="relative aspect-[4/3] bg-gallery-200 overflow-hidden mb-4"><NuxtImg
 							alt="Aesop Store"
 							class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105 filter contrast-[0.95]"
-							src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:33vw"
+                            loading="lazy"
+                    />
 						<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"/>
 					</div>
 					<h4 class="font-serif text-xl text-gallery-900 mb-1">Aesop Flagship, Milan</h4>

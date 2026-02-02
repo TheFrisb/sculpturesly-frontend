@@ -7,9 +7,13 @@
 		<div class="max-w-xl mx-auto px-8 text-center flex flex-col items-center">
 			<div
 					class="w-28 h-28 rounded-full overflow-hidden mb-10 border border-gallery-300 shadow-xl shadow-gallery-200/50">
-				<img
+				<NuxtImg
 						alt="Founder inspecting sculpture" class="w-full h-full object-cover filter grayscale contrast-125"
-						src="https://picsum.photos/2000">
+						src="https://picsum.photos/2000"
+                        format="webp"
+                        sizes="128px"
+                        loading="lazy"
+                />
 			</div>
 			<div class="mb-10 animate-fade-in-up"><h3 class="font-serif text-2xl md:text-3xl text-gallery-900 mb-6">
 				Hand-Inspected in New York.</h3>

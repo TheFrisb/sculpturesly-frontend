@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         '@nuxt/fonts',
         '@nuxt/hints',
         '@nuxt/scripts',
+        '@nuxt/image',
         'nuxt-lucide-icons',
         'nuxt-keen-slider'
     ],

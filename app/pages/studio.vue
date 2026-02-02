@@ -12,10 +12,14 @@ useSeoMeta(buildSeoMeta(() => ({
 	<div class="w-full bg-gallery-50">
 		<section class="relative w-full h-[85vh] overflow-hidden">
 			<div class="absolute inset-0 bg-black/20 z-10"/>
-			<img
+			<NuxtImg
 					alt="Sculptor Workshop Table"
 					class="w-full h-full object-cover object-center filter grayscale-[0.3] contrast-[1.1]"
-					src="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?q=80&amp;w=1800&amp;auto=format&amp;fit=crop">
+					src="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?q=80&amp;w=1800&amp;auto=format&amp;fit=crop"
+                    format="webp"
+                    sizes="100vw"
+                    preload
+            />
 			<div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6"><h1
 					class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 drop-shadow-lg tracking-tight animate-fade-in-up">
 				Form Follows Feeling.</h1>
@@ -26,10 +30,14 @@ useSeoMeta(buildSeoMeta(() => ({
 		<section class="w-full py-32 bg-gallery-50">
 			<div class="max-w-[1600px] mx-auto px-6 md:px-12 space-y-32">
 				<div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
-					<div class="w-full md:w-1/2 relative aspect-[4/5] bg-gallery-200 group overflow-hidden"><img
+					<div class="w-full md:w-1/2 relative aspect-[4/5] bg-gallery-200 group overflow-hidden"><NuxtImg
 							alt="Hand touching stone texture"
 							class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105 filter grayscale-[0.2]"
-							src="https://images.unsplash.com/photo-1596627889757-5326779d750c?q=80&amp;w=1000&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1596627889757-5326779d750c?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:50vw"
+                            loading="lazy"
+                    />
 						<div
 								class="absolute inset-0 bg-gallery-900/10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
 					</div>
@@ -41,10 +49,14 @@ useSeoMeta(buildSeoMeta(() => ({
 							believe the material dictates the form, not the other way around.</p></div>
 				</div>
 				<div class="flex flex-col md:flex-row-reverse items-center gap-16 md:gap-24">
-					<div class="w-full md:w-1/2 relative aspect-[4/5] bg-gallery-200 group overflow-hidden"><img
+					<div class="w-full md:w-1/2 relative aspect-[4/5] bg-gallery-200 group overflow-hidden"><NuxtImg
 							alt="Applying patina"
 							class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105 filter sepia-[0.2] contrast-[1.1]"
-							src="https://images.unsplash.com/photo-1616423662038-045b41295328?q=80&amp;w=1000&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1616423662038-045b41295328?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:50vw"
+                            loading="lazy"
+                    />
 						<div
 								class="absolute inset-0 bg-gallery-900/10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
 					</div>

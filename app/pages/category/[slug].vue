@@ -155,12 +155,14 @@ useHead({
 						class="group break-inside-avoid relative cursor-pointer mb-12 animate-fade-in-up block"
 				>
 					<div class="relative overflow-hidden mb-4 bg-gallery-200">
-						<img
+						<NuxtImg
 								:alt="product.title"
 								class="w-full h-auto object-cover transform transition-transform duration-[1s] ease-out group-hover:scale-105 filter grayscale-[0.1] group-hover:grayscale-0 opacity-100 group-hover:opacity-90"
 								:src="product.thumbnail"
+                                format="webp"
+                                sizes="100vw sm:50vw lg:33vw"
 								loading="lazy"
-						>
+						/>
 						<div
 								class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
 							<div class="bg-black/40 backdrop-blur-sm px-6 py-3 border border-white/20">

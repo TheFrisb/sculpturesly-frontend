@@ -11,10 +11,14 @@ useSeoMeta(buildSeoMeta(() => ({
 <template>
 	<div class="w-full bg-[#F9F8F6] min-h-screen pt-32 md:pt-0">
 		<div class="flex flex-col md:flex-row min-h-screen">
-			<div class="w-full md:w-[40%] bg-gallery-200 relative min-h-[50vh] md:min-h-screen overflow-hidden group"><img
+			<div class="w-full md:w-[40%] bg-gallery-200 relative min-h-[50vh] md:min-h-screen overflow-hidden group"><NuxtImg
 					alt="Minimalist Curator Desk"
 					class="w-full h-full object-cover filter grayscale-[0.4] contrast-[0.95] transition-transform duration-[2s] group-hover:scale-105"
-					src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+					src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                    format="webp"
+                    sizes="100vw md:40vw"
+                    loading="lazy"
+            />
 				<div class="absolute inset-0 bg-gallery-900/10 mix-blend-multiply"/>
 				<div
 						class="absolute bottom-0 left-0 w-full p-8 md:p-12 lg:p-16 bg-gradient-to-t from-black/60 to-transparent text-white">

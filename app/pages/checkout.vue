@@ -142,9 +142,13 @@ const handleOrderSubmit = async (payload: OrderCreatePayload) => {
 
 						<!-- Thumbnail with Badge -->
 						<div class="w-20 h-20 bg-gallery-200 flex-shrink-0 relative">
-							<img
+							<NuxtImg
 									v-if="item.variant.image" :src="item.variant.image" :alt="item.variant.product_title"
-									class="w-full h-full object-cover">
+									class="w-full h-full object-cover"
+                                    format="webp"
+                                    sizes="80px"
+                                    loading="lazy"
+                            />
 							<div v-else class="w-full h-full flex items-center justify-center text-xs text-gallery-500">No img</div>
 							<span
 									class="absolute -top-2 -right-2 w-5 h-5 bg-gallery-500 text-white text-[10px] flex items-center justify-center rounded-full font-sans">

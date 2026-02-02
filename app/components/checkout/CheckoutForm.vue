@@ -391,7 +391,7 @@ const onSubmit = () => {
 											class="flex items-center px-4 py-3 hover:bg-gallery-100 cursor-pointer transition-colors"
 											:class="{ 'bg-gallery-50': form.shipping_address.country === c.code }"
 											@mousedown.prevent="selectCountry(c.code, c.name)">
-										<img :src="c.flag" alt="" class="w-5 h-auto mr-3 shadow-sm border border-gallery-200">
+										<NuxtImg :src="c.flag" alt="" class="w-5 h-auto mr-3 shadow-sm border border-gallery-200" format="webp" />
 										<span class="font-sans text-sm text-gallery-900">{{ c.name }}</span>
 										<LucideCheck
 												v-if="form.shipping_address.country === c.code" :size="14"

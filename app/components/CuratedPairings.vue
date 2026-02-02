@@ -24,11 +24,14 @@ const curatedProducts = computed<ProductListItem[]>(() => {
 				<div v-if="featuredCategory" class="md:col-span-2 relative group cursor-pointer">
 					<NuxtLink :to="`/category/${featuredCategory.slug}`" class="block h-full">
 						<div class="w-full h-full min-h-[400px] bg-gallery-200 overflow-hidden relative">
-							<img
+							<NuxtImg
 									:alt="featuredCategory.title"
 									class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
 									:src="featuredCategory.image || 'https://images.unsplash.com/photo-1543445330-3629471bb952?q=80&w=1200&auto=format&fit=crop'"
-							>
+                                    format="webp"
+                                    sizes="100vw md:50vw"
+                                    loading="lazy"
+							/>
 							<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"/>
 							<div class="absolute bottom-8 left-8 text-white">
                 <span class="font-sans text-[10px] uppercase tracking-widest block mb-2 opacity-90">

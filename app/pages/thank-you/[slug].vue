@@ -72,11 +72,13 @@ const formattedDate = computed(() => {
 
 				<!-- VISUAL (Left) -->
 				<div class="w-full md:w-1/2 aspect-square md:aspect-auto relative bg-gallery-200">
-					<img
+					<NuxtImg
 							:alt="firstItem?.product_name || 'Artwork'"
 							class="w-full h-full object-cover filter grayscale-[0.1]"
 							:src="itemImage"
-					>
+                            format="webp"
+                            sizes="100vw md:50vw"
+                    />
 					<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"/>
 					<div class="absolute bottom-8 left-8 text-white">
             <span class="font-sans text-[10px] uppercase tracking-widest opacity-80 mb-2 block">

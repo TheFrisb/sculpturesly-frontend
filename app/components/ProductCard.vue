@@ -20,12 +20,15 @@ const year = computed(() => new Date(props.product.created_at).getFullYear());
 <template>
 	<NuxtLink :to="`/product/${product.slug}`" class="group mb-12 break-inside-avoid relative cursor-pointer block">
 		<div class="relative overflow-hidden mb-4 bg-gallery-100 aspect-[3/4]">
-			<img
+			<NuxtImg
 					v-if="product.thumbnail"
 					:src="product.thumbnail"
 					:alt="product.title"
+                    format="webp"
+                    loading="lazy"
+                    sizes="100vw sm:50vw lg:33vw"
 					class="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale-[0.2] group-hover:grayscale-0"
-			>
+			/>
 			<div v-else class="w-full h-full flex items-center justify-center text-gallery-400 bg-gallery-200">
 				<span class="font-serif italic">No Image</span>
 			</div>

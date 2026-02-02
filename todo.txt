@@ -1,14 +1,8 @@
-2. Checkout complete
+1. Fix add to cart
+2. Fix checkout
 --
-1. Collections filtering
+3. Collections filtering
 --
-1. Total optimization of frontend
-2. SSR compatibility
-3. Image optimization
+4. Design improvement & data population
 --
-1. Design improvement & data population
-2.  Search functionality
---
-
-
-1.
+5. Search functionality

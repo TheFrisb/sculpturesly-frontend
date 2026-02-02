@@ -37,9 +37,13 @@ const hasData = computed(() => categories.value && categories.value.length >= 3)
 				<NuxtLink
 						:to="`/category/${categories[0].category.slug}`"
 						class="group relative w-full h-[60vh] lg:h-full bg-gallery-200 overflow-hidden cursor-pointer block">
-					<img
+					<NuxtImg
 							:src="categories[0].image" :alt="categories[0].category.title"
-							class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter grayscale-[0.2] group-hover:grayscale-0">
+							class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter grayscale-[0.2] group-hover:grayscale-0"
+                            format="webp"
+                            sizes="100vw lg:50vw"
+                            loading="lazy"
+                    />
 					<div
 							class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-70 transition-opacity"/>
 
@@ -63,9 +67,13 @@ const hasData = computed(() => categories.value && categories.value.length >= 3)
 					<NuxtLink
 							:to="`/category/${categories[1].category.slug}`"
 							class="group relative flex-1 bg-gallery-200 overflow-hidden cursor-pointer min-h-[40vh] lg:min-h-0 block">
-						<img
+						<NuxtImg
 								:src="categories[1].image" :alt="categories[1].category.title"
-								class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter sepia-[0.2] group-hover:sepia-0">
+								class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter sepia-[0.2] group-hover:sepia-0"
+                                format="webp"
+                                sizes="100vw lg:25vw"
+                                loading="lazy"
+                        />
 						<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-80 transition-opacity"/>
 
 						<div class="absolute bottom-8 left-8 text-white z-10">
@@ -83,9 +91,13 @@ const hasData = computed(() => categories.value && categories.value.length >= 3)
 					<NuxtLink
 							:to="`/category/${categories[2].category.slug}`"
 							class="group relative flex-1 bg-gallery-200 overflow-hidden cursor-pointer min-h-[40vh] lg:min-h-0 block">
-						<img
+						<NuxtImg
 								:src="categories[2].image" :alt="categories[2].category.title"
-								class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter contrast-[1.1]">
+								class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 filter contrast-[1.1]"
+                                format="webp"
+                                sizes="100vw lg:25vw"
+                                loading="lazy"
+                        />
 						<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 transition-opacity"/>
 
 						<div class="absolute bottom-8 left-8 text-white z-10">

@@ -15,10 +15,14 @@ useSeoMeta(buildSeoMeta(() => ({
 	<section id="artists" class="w-full pt-20 px-4 md:px-8">
 		<div class="relative w-full h-[70vh] md:h-[80vh] overflow-hidden rounded-sm group">
 			<div class="absolute inset-0 bg-gallery-900/30 z-10"/>
-			<img
+			<NuxtImg
 					alt="Artist Hands Working Clay"
 					class="w-full h-full object-cover object-center filter grayscale-[0.4] transition-transform duration-[3s] ease-in-out group-hover:scale-105"
-					src="https://picsum.photos/2000">
+					src="https://picsum.photos/2000"
+                    format="webp"
+                    sizes="100vw"
+                    loading="lazy"
+            />
 			<div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6"><p
 					class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-white/80 mb-8 animate-fade-in">Inside
 				The Studio</p>

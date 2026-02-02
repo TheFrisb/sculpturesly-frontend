@@ -76,12 +76,15 @@ const currentSlide = ref(0)
 									class="block w-full h-full cursor-pointer"
 									:aria-label="`View ${item.product.title}`"
 							>
-								<img
+								<NuxtImg
 										:src="item.image"
 										:alt="item.product.title"
 										class="w-full h-full object-cover object-center filter grayscale-[0.2] contrast-[1.05] transition-transform duration-[6000ms] ease-out"
 										:class="{ 'scale-110': currentSlide === index }"
-								>
+                                        format="webp"
+                                        sizes="100vw lg:60vw"
+                                        preload
+								/>
 							</NuxtLink>
 							<div
 									class="absolute bottom-6 right-6 z-30 hidden md:block transition-opacity duration-1000"

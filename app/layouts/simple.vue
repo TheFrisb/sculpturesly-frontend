@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DefaultHeader from "~/components/layout/DefaultHeader.vue";
-import DefaultFooter from "~/components/layout/DefaultFooter.vue";
+import DefaultFooter from "~/components/layout/DefaultFooter.server.vue";
 </script>
 
 <template>

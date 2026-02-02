@@ -12,10 +12,14 @@ useSeoMeta(buildSeoMeta(() => ({
 	<div class="w-full bg-gallery-50">
 		<section class="relative w-full h-[70vh] overflow-hidden">
 			<div class="absolute inset-0 bg-gallery-900/20 z-10 mix-blend-multiply"/>
-			<img
+			<NuxtImg
 					alt="Wooden Art Crate in Sunlit Room"
 					class="w-full h-full object-cover object-center filter sepia-[0.1] contrast-[0.95]"
-					src="https://images.unsplash.com/photo-1595246140625-573b715d1128?q=80&amp;w=2000&amp;auto=format&amp;fit=crop">
+					src="https://images.unsplash.com/photo-1595246140625-573b715d1128?q=80&amp;w=2000&amp;auto=format&amp;fit=crop"
+                    format="webp"
+                    sizes="100vw"
+                    preload
+            />
 			<div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6"><h1
 					class="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-6 drop-shadow-lg tracking-tight animate-fade-in-up">
 				From Our Studio to Your Sanctuary.</h1>
@@ -120,9 +124,13 @@ useSeoMeta(buildSeoMeta(() => ({
 			<div class="max-w-[1400px] mx-auto px-6 md:px-12">
 				<div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 					<div class="w-full lg:w-1/2 relative aspect-square bg-white border border-gallery-200 p-8 shadow-sm group">
-						<img
+						<NuxtImg
 								alt="Open Art Crate" class="w-full h-full object-cover filter grayscale-[0.2] contrast-110"
-								src="https://images.unsplash.com/photo-1590664216212-62e7637d1665?q=80&amp;w=1000&amp;auto=format&amp;fit=crop">
+								src="https://images.unsplash.com/photo-1590664216212-62e7637d1665?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                                format="webp"
+                                sizes="100vw lg:50vw"
+                                loading="lazy"
+                        />
 						<div
 								class="absolute top-[30%] left-[40%] group-hover:opacity-100 opacity-0 transition-opacity duration-500">
 							<div class="relative">

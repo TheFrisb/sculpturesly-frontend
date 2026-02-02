@@ -132,9 +132,13 @@ useSeoMeta(buildSeoMeta(() => ({
 			<div class="max-w-4xl mx-auto flex flex-col items-center">
 				<div
 						class="relative w-full aspect-[16/9] md:aspect-[21/9] bg-white shadow-2xl p-8 md:p-12 border border-gallery-200 transform hover:scale-[1.01] transition-transform duration-700">
-					<img
+					<NuxtImg
 							alt="Certificate of Authenticity" class="w-full h-full object-cover filter sepia-[0.3] contrast-[0.9]"
-							src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:50vw"
+                            loading="lazy"
+                    />
 					<div class="absolute inset-0 bg-gallery-900/10 mix-blend-multiply pointer-events-none"/>
 					<div
 							class="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 bg-gallery-900 text-white px-8 py-3 shadow-lg">

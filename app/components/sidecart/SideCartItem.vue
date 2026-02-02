@@ -33,12 +33,15 @@ const formattedPrice = computed(() => {
 	<div class="group relative flex py-4 border-b border-gallery-200/60 last:border-0 animate-fade-in-up">
 
 		<div class="w-24 h-24 bg-gallery-200 flex-shrink-0 overflow-hidden shadow-sm">
-			<img
+			<NuxtImg
 					v-if="item.variant.image"
 					:src="item.variant.image"
 					:alt="item.variant.product_title"
 					class="w-full h-full object-cover grayscale-[0.1] group-hover:grayscale-0 transition-all duration-500"
-			>
+                    format="webp"
+                    sizes="96px"
+                    loading="lazy"
+			/>
 			<div v-else class="w-full h-full flex items-center justify-center bg-gallery-300 text-gallery-500 font-serif">
 				<span class="text-xs uppercase tracking-widest">No Img</span>
 			</div>

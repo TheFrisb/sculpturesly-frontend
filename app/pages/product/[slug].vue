@@ -123,11 +123,14 @@ const toggleAccordion = (section: string) => {
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative">
 					<div class="flex flex-col space-y-12">
 						<div class="w-full bg-gallery-200 overflow-hidden relative group">
-							<img
+							<NuxtImg
 									:alt="product.title"
 									class="w-full h-auto object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-[1.02]"
 									:src="product.thumbnail"
-							>
+                                    format="webp"
+                                    sizes="100vw lg:50vw"
+                                    preload
+							/>
 						</div>
 						<div
 								v-if="product.gallery_images && product.gallery_images.length > 0"
@@ -137,11 +140,14 @@ const toggleAccordion = (section: string) => {
 									:key="img.id"
 									class="w-full aspect-[4/5] bg-gallery-200 overflow-hidden"
 							>
-								<img
+								<NuxtImg
 										:src="img.image"
 										:alt="img.alt_text || product.title"
 										class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
-								>
+                                        format="webp"
+                                        sizes="100vw md:50vw"
+                                        loading="lazy"
+								/>
 							</div>
 						</div>
 					</div>
@@ -266,26 +272,38 @@ const toggleAccordion = (section: string) => {
 						class="font-serif text-2xl text-gallery-900 mb-12 text-center">Process &amp; Creation</h3>
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 						<div class="flex flex-col space-y-4 group">
-							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><img
+							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><NuxtImg
 									alt="Raw Materials"
 									class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-700"
-									src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&amp;w=600&amp;auto=format&amp;fit=crop">
+									src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&amp;w=600&amp;auto=format&amp;fit=crop"
+                                    format="webp"
+                                    sizes="100vw md:33vw"
+                                    loading="lazy"
+                            />
 							</div>
 							<p class="font-serif text-sm italic text-gallery-600 border-l border-clay-400 pl-4">Sourced from recycled
 								industrial bronze.</p></div>
 						<div class="flex flex-col space-y-4 group">
-							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><img
+							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><NuxtImg
 									alt="Casting Process"
 									class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-700"
-									src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&amp;w=600&amp;auto=format&amp;fit=crop">
+									src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&amp;w=600&amp;auto=format&amp;fit=crop"
+                                    format="webp"
+                                    sizes="100vw md:33vw"
+                                    loading="lazy"
+                            />
 							</div>
 							<p class="font-serif text-sm italic text-gallery-600 border-l border-clay-400 pl-4">Lost-wax casted at
 								1200°C.</p></div>
 						<div class="flex flex-col space-y-4 group">
-							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><img
+							<div class="w-full aspect-square bg-gallery-200 overflow-hidden"><NuxtImg
 									alt="Finishing"
 									class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-700"
-									src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&amp;w=600&amp;auto=format&amp;fit=crop">
+									src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&amp;w=600&amp;auto=format&amp;fit=crop"
+                                    format="webp"
+                                    sizes="100vw md:33vw"
+                                    loading="lazy"
+                            />
 							</div>
 							<p class="font-serif text-sm italic text-gallery-600 border-l border-clay-400 pl-4">Hand-polished patina
 								for 40 hours.</p></div>
@@ -383,9 +401,13 @@ const toggleAccordion = (section: string) => {
 							</svg>
 							<span>Global White Glove Tracked</span></div>
 					</div>
-					<div class="order-1 md:order-2 h-[400px] bg-gallery-200 overflow-hidden relative"><img
+					<div class="order-1 md:order-2 h-[400px] bg-gallery-200 overflow-hidden relative"><NuxtImg
 							alt="Wooden Shipping Crate" class="w-full h-full object-cover filter sepia-[0.2] contrast-[0.9]"
-							src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="100vw md:50vw"
+                            loading="lazy"
+                    />
 						<div
 								class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 font-mono text-xs text-gallery-900">
 							CRATE ID: #SC-9921
@@ -395,9 +417,13 @@ const toggleAccordion = (section: string) => {
 			</section>
 			<section class="w-full py-32 bg-gallery-50 border-b border-gallery-200">
 				<div class="max-w-[800px] mx-auto px-6 text-center flex flex-col items-center">
-					<div class="w-32 h-32 rounded-full overflow-hidden mb-8 border-2 border-gallery-100"><img
+					<div class="w-32 h-32 rounded-full overflow-hidden mb-8 border-2 border-gallery-100"><NuxtImg
 							alt="Elara Vance Portrait" class="w-full h-full object-cover grayscale"
-							src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&amp;w=400&amp;auto=format&amp;fit=crop">
+							src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&amp;w=400&amp;auto=format&amp;fit=crop"
+                            format="webp"
+                            sizes="128px"
+                            loading="lazy"
+                    />
 					</div>
 					<h3 class="font-serif text-2xl text-gallery-900 mb-2">Elara Vance</h3>
 					<div class="h-8 mb-6 opacity-70">
