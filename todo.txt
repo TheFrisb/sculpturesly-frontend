@@ -1,20 +1,17 @@
-4. Search functionality
-5. Products
--- Description
--- Details rendering
--- Choose variant logic
-6. Trade form
-7. Newsletter link
-8. Social links
-9. Terms of service, privacy policy, shipping policy
-10. Stripe elements on checkout
-11. Total optimization of frontend
-12. Emails
-13. Collections Filters
-14. Design improvement
-15. Google analytics
-
-
-1. SEO Tags
-2. Seed products
-3. Optimize loading / SSR & add images
+2. Hide trade & studio
+3. Seo tags
+4. Fix api proxy
+--
+1. Products
+- Description
+- Details rendering
+2. Checkout complete
+--
+1. Collections filtering
+--
+1. Total optimization of frontend
+2. SSR compatibility
+3. Image optimization
+--
+1. Design improvement & data population
+2.  Search functionality

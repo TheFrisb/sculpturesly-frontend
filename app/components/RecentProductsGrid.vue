@@ -35,9 +35,8 @@ const isLoading = computed(() => status.value === 'pending');
 				<span class="font-serif text-gallery-400 italic">Loading collection...</span>
 			</div>
 
-			<div v-else-if="error" class="py-20 text-center text-red-400 font-sans">
-				{{ error }}
-				Unable to load products at this time.
+			<div v-else-if="error" class="py-20 text-center text-gallery-400 font-serif italic">
+				Unable to load curated products at this time.
 			</div>
 
 			<div v-else class="columns-1 sm:columns-2 lg:columns-3 gap-12 space-y-12">

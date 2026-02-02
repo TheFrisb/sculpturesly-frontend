@@ -22,5 +22,10 @@ export const useAPI = <T>(
             ...extraHeaders,
             ...options.headers,
         },
+        onResponseError({ request, response, options }) {
+            console.error('[API Error]', response.status, response.statusText);
+            console.error('Request:', request);
+            console.error('Body:', response._data);
+        }
     })
 }

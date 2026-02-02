@@ -7,7 +7,7 @@ interface FeaturedSectionItem {
 	product: ProductListItem;
 }
 
-const {data: slides} = await useAPI<FeaturedSectionItem[]>('/api/sections/featured-products/', {
+const {data: slides, error} = await useAPI<FeaturedSectionItem[]>('/api/sections/featured-products/', {
 	key: 'hero-featured-products',
 })
 
@@ -95,6 +95,10 @@ const currentSlide = ref(0)
 					</div>
 
 					<!-- Loading State -->
+					<div v-else-if="error" class="w-full h-full bg-gallery-300 flex items-center justify-center">
+						<span class="font-serif text-gallery-500 italic">Unable to load curation.</span>
+					</div>
+
 					<div v-else class="w-full h-full bg-gallery-300 flex items-center justify-center">
 						<span class="font-serif text-gallery-500 italic">Loading curation...</span>
 					</div>

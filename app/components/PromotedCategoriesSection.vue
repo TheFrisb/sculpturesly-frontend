@@ -29,8 +29,7 @@ const hasData = computed(() => categories.value && categories.value.length >= 3)
 				<span class="font-serif italic text-gallery-400 animate-pulse">Loading curation...</span>
 			</div>
 
-			<div v-else-if="error" class="h-[20vh] flex items-center justify-center text-red-400">
-				{{ error }}
+			<div v-else-if="error" class="h-[20vh] flex items-center justify-center text-gallery-400 font-serif italic">
 				Unable to load collections.
 			</div>
 

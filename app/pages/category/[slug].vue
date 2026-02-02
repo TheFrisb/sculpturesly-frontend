@@ -7,6 +7,7 @@ const slug = route.params.slug as string;
 const products = ref<ProductListItem[]>([]);
 const nextPage = ref<string | null>(null);
 const isLoading = ref(false);
+const fetchError = ref<any>(null);
 const totalCount = ref(0);
 
 const {data: category} = await useCategory(route.params.slug)
@@ -44,12 +45,16 @@ const fetchProducts = async (isLoadMore = false) => {
 		}
 
 		// 3. API Call
-		const {data} = await useAPI<PaginatedProductResponse>('/api/products/', {
+		const {data, error} = await useAPI<PaginatedProductResponse>('/api/products/', {
 			query: params
 		});
 
 		// 4. Handle Response
-		if (data.value) {
+		if (error.value) {
+			console.error('Failed to fetch products', error.value);
+            fetchError.value = error.value;
+		} else if (data.value) {
+            fetchError.value = null; // Clear error on success
 			if (isLoadMore) {
 				// Append new results to existing list
 				products.value.push(...data.value.results);
@@ -62,8 +67,6 @@ const fetchProducts = async (isLoadMore = false) => {
 			nextPage.value = data.value.next;
 			totalCount.value = data.value.count;
 		}
-	} catch (err) {
-		console.error('Failed to fetch products', err);
 	} finally {
 		isLoading.value = false;
 	}
@@ -122,6 +125,10 @@ useSeoMeta(resolveSeoTags(() => category.value?.seo_metadata))
 			<div v-if="isLoading && products.length === 0" class="flex justify-center items-center py-20">
 				<span class="font-serif text-gallery-400 italic">Loading collection...</span>
 			</div>
+
+            <div v-else-if="fetchError" class="flex justify-center items-center py-20">
+                <span class="font-serif text-gallery-500 italic">Unable to load collection.</span>
+            </div>
 
 			<div v-else-if="products.length === 0" class="flex justify-center items-center py-20">
 				<span class="font-serif text-gallery-500">No works found in this collection.</span>
