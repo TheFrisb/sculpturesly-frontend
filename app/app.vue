@@ -1,4 +1,19 @@
-<script lang="ts">
+<script setup lang="ts">
+    useSeoMeta({
+        titleTemplate: '%s | Sculpturesly',
+        description: 'Sculpturesly: Curated modern sculptures, statues, and artistic home decor. Elevate your space with timeless forms.',
+        ogSiteName: 'Sculpturesly',
+        twitterCard: 'summary_large_image',
+    })
+
+    useHead({
+        script: [
+            {
+                type: 'application/ld+json',
+                innerHTML: JSON.stringify(buildOrganizationJsonLd())
+            }
+        ]
+    })
 </script>
 
 <template>

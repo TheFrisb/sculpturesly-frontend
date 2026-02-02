@@ -1,5 +1,3 @@
-2. Hide trade & studio
-3. Seo tags
 4. Fix api proxy
 --
 1. Products

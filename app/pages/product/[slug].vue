@@ -34,6 +34,16 @@ const trackViewContent = () => {
 	}
 };
 
+const url = useRequestURL();
+useHead({
+    script: [
+        {
+            type: 'application/ld+json',
+            innerHTML: JSON.stringify(buildProductJsonLd(product.value, url.href), null, 2)
+        }
+    ]
+})
+
 onMounted(() => {
 	trackViewContent();
 });

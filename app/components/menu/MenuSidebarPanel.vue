@@ -77,32 +77,6 @@
 								/>
 							</button>
 
-							<NuxtLink
-									to="/studio"
-									class="text-left font-serif text-3xl md:text-4xl text-gallery-900 hover:text-clay-600 transition-colors"
-									active-class="text-clay-600 italic"
-									@click="handleLinkClick"
-							>
-								The Studio
-							</NuxtLink>
-
-							<!--							<NuxtLink-->
-							<!--									to="/journal"-->
-							<!--									class="text-left font-serif text-3xl md:text-4xl text-gallery-900 hover:text-clay-600 transition-colors"-->
-							<!--									active-class="text-clay-600 italic"-->
-							<!--									@click="handleLinkClick"-->
-							<!--							>-->
-							<!--								Journal-->
-							<!--							</NuxtLink>-->
-
-							<NuxtLink
-									to="/trade"
-									class="text-left font-serif text-3xl md:text-4xl text-gallery-900 hover:text-clay-600 transition-colors"
-									active-class="text-clay-600 italic"
-									@click="handleLinkClick"
-							>
-								Trade
-							</NuxtLink>
 						</div>
 
 						<!-- Footer Links -->

@@ -54,9 +54,10 @@
 				</NuxtLink>
 			</div>
 
-			<div
-					class="hidden md:flex space-x-12 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full items-center">
-
+			<nav
+					class="hidden md:flex space-x-12 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full items-center"
+					aria-label="Desktop Navigation"
+			>
 				<div class="h-full flex items-center" @mouseenter="openMenu">
 					<NuxtLink
 							to="/category/all"
@@ -67,27 +68,7 @@
 						Collection
 					</NuxtLink>
 				</div>
-
-				<div class="h-full flex items-center">
-					<NuxtLink
-							to="/trade"
-							class="font-sans text-xs tracking-[0.2em] text-gallery-600 hover:text-gallery-900 transition-colors duration-300 uppercase py-2"
-							@click="forceCloseMenu"
-					>
-						Trade
-					</NuxtLink>
-				</div>
-
-				<div class="h-full flex items-center">
-					<NuxtLink
-							to="/studio"
-							class="font-sans text-xs tracking-[0.2em] text-gallery-600 hover:text-gallery-900 transition-colors duration-300 uppercase py-2"
-							@click="forceCloseMenu"
-					>
-						Studio
-					</NuxtLink>
-				</div>
-			</div>
+			</nav>
 
 			<div class="flex items-center space-x-6 md:space-x-8 text-gallery-800 z-50">
 				<button aria-label="Open Search" class="hidden md:block hover:text-clay-500 transition-colors duration-300">

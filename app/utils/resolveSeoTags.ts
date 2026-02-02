@@ -1,4 +1,5 @@
-import type {UseSeoMetaInput} from '@unhead/schema'
+import type { UseSeoMetaInput } from '@unhead/schema'
+import type { SeoTags } from '~/types/seo'
 
 export interface SeoBuilderOptions {
     title?: string
@@ -68,8 +69,93 @@ export const buildSeoMeta = (options: () => SeoBuilderOptions): UseSeoMetaInput 
 
         robots: () => opts().robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 
-        'product:price:amount': () => opts().price?.amount,
         'product:price:currency': () => opts().price?.currency,
         'product:availability': () => opts().availability,
+    }
+}
+
+// --- JSON-LD Structured Data Builders ---
+
+export const buildOrganizationJsonLd = () => {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Sculpturesly',
+        url: 'https://sculpturesly.com',
+        logo: 'https://sculpturesly.com/logo.png', // Replace with actual logo URL
+        sameAs: [
+            'https://instagram.com/sculpturesly',
+            'https://facebook.com/sculpturesly'
+        ]
+    }
+}
+
+export const buildProductJsonLd = (product: any, url: string) => {
+    if (!product) return null;
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.title,
+        description: product.description,
+        image: product.thumbnail,
+        sku: product.variants?.[0]?.sku || product.id,
+        offers: {
+            '@type': 'Offer',
+            url: url,
+            priceCurrency: 'USD',
+            price: product.base_price,
+            availability: product.status === 'PUBLISHED' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            itemCondition: 'https://schema.org/NewCondition',
+            priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                merchantReturnDays: 30,
+                returnMethod: 'https://schema.org/ReturnByMail',
+                returnFees: 'https://schema.org/FreeReturn'
+            },
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: 0,
+                    currency: 'USD'
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US'
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 1,
+                        maxValue: 3,
+                        unitCode: 'd'
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 3,
+                        maxValue: 7,
+                        unitCode: 'd'
+                    }
+                }
+            }
+        }
+    }
+}
+
+export const buildBreadcrumbJsonLd = (items: { name: string; item: string }[]) => {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: items.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.name,
+            item: item.item
+        }))
     }
 }

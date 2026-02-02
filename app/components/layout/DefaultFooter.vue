@@ -68,9 +68,10 @@
 							class="flex items-center border-b border-gallery-300 pb-2 focus-within:border-clay-500 transition-colors group">
 						<input
 								placeholder="Email Address"
+								aria-label="Email Address for Newsletter"
 								class="bg-transparent border-none focus:ring-0 text-gallery-900 placeholder-gallery-400 w-full font-sans text-sm px-0"
 								type="email">
-						<button type="submit" class="text-gallery-400 group-hover:text-clay-600 transition-colors">
+						<button type="submit" class="text-gallery-400 group-hover:text-clay-600 transition-colors" aria-label="Subscribe">
 							<LucideArrowRight :size="18"/>
 						</button>
 					</form>
@@ -84,19 +85,22 @@
 					<span>•</span>
 					<NuxtLink href="/policy/terms" class="hover:text-gallery-600 transition-colors">Terms of Service</NuxtLink>
 				</div>
-				<div class="flex items-center space-x-3 grayscale opacity-50">
-					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<div class="flex items-center space-x-3 grayscale opacity-50" aria-label="Accepted Payment Methods">
+					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="visa-title">
+                        <title id="visa-title">Visa</title>
 						<rect x="1" y="1" width="36" height="22" rx="2" stroke="currentColor" stroke-width="1"/>
 						<text
 								x="6" y="16" font-family="sans-serif" font-size="10" fill="currentColor" font-weight="bold"
 								letter-spacing="1">VISA
 						</text>
 					</svg>
-					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mc-title">
+                        <title id="mc-title">Mastercard</title>
 						<circle cx="13" cy="12" r="7" stroke="currentColor" stroke-width="1"/>
 						<circle cx="25" cy="12" r="7" stroke="currentColor" stroke-width="1"/>
 					</svg>
-					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg class="h-6 w-auto" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="amex-title">
+                        <title id="amex-title">American Express</title>
 						<rect x="1" y="1" width="36" height="22" rx="2" stroke="currentColor" stroke-width="1"/>
 						<text x="5" y="16" font-family="serif" font-size="9" fill="currentColor" font-weight="bold">AMEX</text>
 					</svg>

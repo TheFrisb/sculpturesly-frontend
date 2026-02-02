@@ -78,6 +78,18 @@ await fetchProducts();
 // SEO
 useSeoMeta(resolveSeoTags(() => category.value?.seo_metadata))
 
+useHead({
+    script: [
+        {
+            type: 'application/ld+json',
+            innerHTML: JSON.stringify(buildBreadcrumbJsonLd([
+                { name: 'Home', item: '/' },
+                { name: category.value?.title || 'Collection', item: route.path }
+            ]))
+        }
+    ]
+})
+
 </script>
 
 <template>
