@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import type {ProductListItem} from '~/types/product';
+import {formatCurrency} from '~/utils/formatters';
 
 const props = defineProps<{
 	product: ProductListItem
 }>();
 
 const formattedPrice = computed(() => {
-	const val = parseFloat(props.product.base_price);
-	return new Intl.NumberFormat('en-US', {
-		style: 'currency',
-		currency: 'USD',
-		minimumFractionDigits: 0
-	}).format(val);
+	return formatCurrency(props.product.base_price);
 });
 
 const year = computed(() => new Date(props.product.created_at).getFullYear());

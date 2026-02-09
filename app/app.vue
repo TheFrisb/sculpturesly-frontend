@@ -25,7 +25,6 @@
 
 <style>
 html {
-	scroll-behavior: smooth;
 }
 
 ::selection {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from 'vue';
+import {formatAttributeValue, formatCurrency} from '~/utils/formatters';
 
 const route = useRoute();
 const slug = computed(() => route.params.slug as string);
@@ -87,6 +87,8 @@ const shippingAttributes = computed(() => {
         .filter(item => item.value);
 });
 
+
+
 const handleAddToCart = async () => {
 	if (!product.value) return;
 
@@ -132,31 +134,14 @@ const toggleAccordion = (section: string) => {
                                     preload
 							/>
 						</div>
-						<div
-								v-if="product.gallery_images && product.gallery_images.length > 0"
-								class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div
-									v-for="img in product.gallery_images.slice(0, 2)"
-									:key="img.id"
-									class="w-full aspect-[4/5] bg-gallery-200 overflow-hidden"
-							>
-								<NuxtImg
-										:src="img.image"
-										:alt="img.alt_text || product.title"
-										class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
-                                        format="webp"
-                                        sizes="100vw md:50vw"
-                                        loading="lazy"
-								/>
-							</div>
-						</div>
+
 					</div>
 					<div class="relative h-full">
 						<div class="lg:sticky lg:top-32 flex flex-col h-full max-w-xl">
 							<header class="mb-10 animate-fade-in-up">
-								<h2 class="font-sans text-xs tracking-[0.25em] uppercase text-gallery-500 mb-4" itemprop="brand">
-									zaza
-								</h2>
+<!--								<h2 class="font-sans text-xs tracking-[0.25em] uppercase text-gallery-500 mb-4" itemprop="brand">-->
+<!--									zaza-->
+<!--								</h2>-->
 								<h1
 										class="font-serif text-4xl md:text-5xl lg:text-6xl text-gallery-900 mb-6 leading-tight">
 									{{ product.title }}
@@ -165,7 +150,7 @@ const toggleAccordion = (section: string) => {
 									{{ product.status === 'PUBLISHED' ? 'Original Artwork' : product.status }}
 								</p>
 								<p class="font-sans text-xl text-gallery-600 font-light" itemprop="offers">
-									<span itemprop="price">{{ product.base_price }}</span>
+									<span itemprop="price">{{ formatCurrency(product.base_price) }}</span>
 								</p>
 							</header>
 
@@ -213,7 +198,7 @@ const toggleAccordion = (section: string) => {
 											<div v-if="specAttributes.length > 0" class="space-y-4">
                                                 <div v-for="attr in specAttributes" :key="attr.name" class="flex justify-between border-b border-gallery-200 pb-2 last:border-0">
                                                     <span class="text-gallery-500 uppercase tracking-widest text-xs">{{ attr.name }}</span>
-                                                    <span class="text-gallery-900 font-medium">{{ attr.value }}</span>
+                                                    <span class="text-gallery-900 font-medium">{{ formatAttributeValue(attr.name, attr.value) }}</span>
                                                 </div>
                                             </div>
                                             <p v-else class="italic text-gallery-400">No specifications available.</p>

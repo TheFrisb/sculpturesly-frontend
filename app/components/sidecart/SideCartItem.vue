@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type {CartItem} from '~/types/cart';
 
+import {formatAttributeValue, formatCurrency} from '~/utils/formatters';
+
 const props = defineProps<{
 	item: CartItem;
 }>();
@@ -24,9 +26,10 @@ const handleRemove = () => {
 };
 
 const formattedPrice = computed(() => {
-	const val = parseFloat(props.item.variant.price);
-	return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(val);
+	return formatCurrency(props.item.variant.price);
 });
+
+import {formatAttributeValue} from '~/utils/formatters';
 </script>
 
 <template>
@@ -59,7 +62,7 @@ const formattedPrice = computed(() => {
 
 					<div class="font-sans text-[10px] text-gallery-500 flex flex-wrap gap-1">
             <span v-for="(val, key) in item.variant.attributes" :key="key">
-              {{ val }}
+              {{ formatAttributeValue(String(key), val) }}
             </span>
 					</div>
 				</div>

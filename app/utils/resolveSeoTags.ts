@@ -103,7 +103,7 @@ export const buildProductJsonLd = (product: any, url: string) => {
         offers: {
             '@type': 'Offer',
             url: url,
-            priceCurrency: 'USD',
+            priceCurrency: 'EUR',
             price: product.base_price,
             availability: product.status === 'PUBLISHED' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
             itemCondition: 'https://schema.org/NewCondition',
@@ -121,7 +121,7 @@ export const buildProductJsonLd = (product: any, url: string) => {
                 shippingRate: {
                     '@type': 'MonetaryAmount',
                     value: 0,
-                    currency: 'USD'
+                    currency: 'EUR'
                 },
                 shippingDestination: {
                     '@type': 'DefinedRegion',

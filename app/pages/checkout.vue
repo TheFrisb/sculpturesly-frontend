@@ -1,5 +1,6 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {FetchError} from 'ofetch';
+import {formatAttributeValue, formatCurrency} from '~/utils/formatters';
 import type {OrderCreatePayload} from '~/types/orders';
 
 definePageMeta({
@@ -31,18 +32,19 @@ const shippingCost = computed(() => {
 const total = computed(() => subtotal.value + shippingCost.value);
 
 const formattedSubtotal = computed(() =>
-		new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal.value)
+		formatCurrency(subtotal.value)
 );
 
 const formattedShipping = computed(() =>
 		shippingCost.value === 0
 				? 'Free'
-				: new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(shippingCost.value)
+				: formatCurrency(shippingCost.value)
 );
 
 const formattedTotal = computed(() =>
-		new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(total.value)
+		formatCurrency(total.value)
 );
+
 
 // --- TYPES ---
 interface CheckoutSuccessResponse {
@@ -143,12 +145,12 @@ const handleOrderSubmit = async (payload: OrderCreatePayload) => {
 						<!-- Thumbnail with Badge -->
 						<div class="w-20 h-20 bg-gallery-200 flex-shrink-0 relative">
 							<NuxtImg
-									v-if="item.variant.image" :src="item.variant.image" :alt="item.variant.product_title"
+									v-if="item.variant.image" :alt="item.variant.product_title" :src="item.variant.image"
 									class="w-full h-full object-cover"
-                                    format="webp"
-                                    sizes="80px"
-                                    loading="lazy"
-                            />
+									format="webp"
+									loading="lazy"
+									sizes="80px"
+							/>
 							<div v-else class="w-full h-full flex items-center justify-center text-xs text-gallery-500">No img</div>
 							<span
 									class="absolute -top-2 -right-2 w-5 h-5 bg-gallery-500 text-white text-[10px] flex items-center justify-center rounded-full font-sans">
@@ -163,18 +165,18 @@ const handleOrderSubmit = async (payload: OrderCreatePayload) => {
 									item.variant.sku
 								}}</span>
 							<div class="text-[10px] text-gallery-500 mt-1 space-x-1">
-								<span v-for="(val, key) in item.variant.attributes" :key="key">{{ val }}</span>
+								<span v-for="(val, key) in item.variant.attributes" :key="key">{{
+										formatAttributeValue(String(key), val)
+									}}</span>
 							</div>
 						</div>
 
-						<!-- Line Price -->
 						<div class="text-right">
-							<span class="font-sans text-sm text-gallery-900">${{ item.total_price }}</span>
+							<span class="font-sans text-sm text-gallery-900">{{ formatCurrency(item.total_price) }}</span>
 						</div>
 					</div>
 				</div>
 
-				<!-- Empty State -->
 				<div v-else class="py-12 text-center text-gallery-500 font-serif italic mb-8">
 					Your cart is empty.
 				</div>
@@ -195,7 +197,7 @@ const handleOrderSubmit = async (payload: OrderCreatePayload) => {
 				<div class="flex justify-between items-center pt-8 border-t border-gallery-300/50">
 					<span class="font-serif text-xl text-gallery-900">Total</span>
 					<div class="text-right">
-						<span class="font-sans text-xs text-gallery-500 mr-2 uppercase tracking-wide">USD</span>
+						<span class="font-sans text-xs text-gallery-500 mr-2 uppercase tracking-wide">EUR</span>
 						<span class="font-serif text-3xl text-gallery-900">{{ formattedTotal }}</span>
 					</div>
 				</div>
@@ -203,4 +205,4 @@ const handleOrderSubmit = async (payload: OrderCreatePayload) => {
 			</div>
 		</div>
 	</div>
-</template> 
+</template>

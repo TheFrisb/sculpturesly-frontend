@@ -80,53 +80,59 @@
 						@click="openCart"
 				>
 					<LucideShoppingBag :size="22"/>
-					<span
-							v-if="cart && cart?.items.length > 0"
-							class="absolute -top-2 -right-2 w-4 h-4 bg-clay-500 rounded-full flex items-center justify-center text-[9px] text-white font-sans"
-					>
-						{{ cart.items.length }}
-					</span>
+					<ClientOnly>
+						<span
+								v-if="cart && cart?.items.length > 0"
+								class="absolute -top-2 -right-2 w-4 h-4 bg-clay-500 rounded-full flex items-center justify-center text-[9px] text-white font-sans"
+						>
+							{{ cart.items.length }}
+						</span>
+					</ClientOnly>
 				</button>
 			</div>
 		</div>
 
-		<div
-				class="absolute top-full left-0 w-full bg-[#F9F8F6] border-b border-gallery-200 shadow-xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] origin-top"
-				:class="isCollectionOpen ? 'max-h-[600px] opacity-100 translate-y-0 visible' : 'max-h-0 opacity-0 -translate-y-2 invisible'"
-				role="region"
-				aria-label="Collection Menu"
-				@mouseenter="openMenu"
-				@mouseleave="closeMenu"
-		>
-			<div class="max-w-[1600px] mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+		<ClientOnly>
+			<div
+					class="absolute top-full left-0 w-full bg-[#F9F8F6] border-b border-gallery-200 shadow-xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] origin-top"
+					:class="isCollectionOpen ? 'max-h-[85vh] opacity-100 translate-y-0 visible' : 'max-h-0 opacity-0 -translate-y-2 invisible'"
+					role="region"
+					aria-label="Collection Menu"
+					@mouseenter="openMenu"
+					@mouseleave="closeMenu"
+			>
+				<div class="max-w-[1600px] mx-auto px-6 md:px-12 py-12 overflow-y-auto max-h-[85vh] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-x-8 gap-y-12">
 
-				<div
-						v-for="(parent, index) in categories"
-						:key="parent.id"
-						class="flex flex-col space-y-6 animate-fade-in-up"
-						:style="{ animationDelay: `${(index + 1) * 0.05}s` }"
-				>
-					<NuxtLink
-							:to="`/category/${parent.slug}`"
-							class="font-sans text-[10px] uppercase tracking-[0.25em] text-gallery-400">
-						{{ parent.title }}
-					</NuxtLink>
-					<ul class="flex flex-col space-y-4">
-						<li v-for="child in parent.children" :key="child.id">
-							<NuxtLink
-									:to="`/category/${child.slug}`"
-									class="font-serif text-lg text-gallery-800 hover:text-clay-600 transition-colors block"
-									active-class="text-clay-600 pl-2 border-l-2 border-clay-400"
-									@click="forceCloseMenu"
-							>
-								{{ child.title }}
-							</NuxtLink>
-						</li>
-					</ul>
+					<div
+							v-for="(parent, index) in categories"
+							:key="parent.id"
+							class="flex flex-col space-y-6 animate-fade-in-up"
+							:style="{ animationDelay: `${(index + 1) * 0.05}s` }"
+					>
+						<NuxtLink
+								:to="`/category/${parent.slug}`"
+								class="font-sans text-[10px] uppercase tracking-[0.25em] text-gallery-400"
+								@click="forceCloseMenu"
+						>
+							{{ parent.title }}
+						</NuxtLink>
+						<ul class="flex flex-col space-y-4">
+							<li v-for="child in parent.children" :key="child.id">
+								<NuxtLink
+										:to="`/category/${child.slug}`"
+										class="font-serif text-lg text-gallery-800 hover:text-clay-600 transition-colors block"
+										active-class="text-clay-600 pl-2 border-l-2 border-clay-400"
+										@click="forceCloseMenu"
+								>
+									{{ child.title }}
+								</NuxtLink>
+							</li>
+						</ul>
+					</div>
+
 				</div>
-
 			</div>
-		</div>
+		</ClientOnly>
 
 		<ClientOnly>
 			<MenuSidebarPanel/>

@@ -1,8 +1,4 @@
-1. Make categories menu and sidebar more attractive
-2. Add categories filtering
-3. Add categories pagination
---
-1. Add search functionality
---
 1. Improve design
-2. Test and improve pagespeed insights
+-- Header
+2. Add search functionality
+3. Test and improve pagespeed insights

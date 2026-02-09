@@ -65,7 +65,7 @@ useSeoMeta(buildSeoMeta(() => ({
 							that you have sufficient funds and the legal capacity to enter into such a contract.
 						</div>
 						<div><span class="font-bold text-gallery-900 mr-2">1.2 Pricing &amp; Currency.</span>All prices are listed
-							in USD. While we strive for accuracy, Sculpturesly reserves the right to correct pricing errors. In such
+							in EUR. While we strive for accuracy, Sculpturesly reserves the right to correct pricing errors. In such
 							an event, you will be notified and given the option to proceed or cancel.
 						</div>
 						<div><span class="font-bold text-gallery-900 mr-2">1.3 Returns.</span>Our return policy allows for a

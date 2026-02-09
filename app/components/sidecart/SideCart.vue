@@ -21,9 +21,10 @@ const handleCheckout = () => {
 };
 
 const formattedSubtotal = computed(() => {
-	const total = parseFloat(cart.value?.total_price || '0');
-	return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(total);
+	return formatCurrency(cart.value?.total_price || '0');
 });
+
+import {formatCurrency} from '~/utils/formatters';
 </script>
 
 <template>
