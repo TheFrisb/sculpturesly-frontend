@@ -1,8 +1,8 @@
-1. Fix add to cart
-2. Fix checkout
+1. Make categories menu and sidebar more attractive
+2. Add categories filtering
+3. Add categories pagination
 --
-3. Collections filtering
+1. Add search functionality
 --
-4. Design improvement & data population
---
-5. Search functionality
+1. Improve design
+2. Test and improve pagespeed insights
