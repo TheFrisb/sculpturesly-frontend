@@ -2,7 +2,6 @@ export type CartStatus = 'ABANDONED' | 'ACTIVE';
 
 export interface CartVariant {
     id: number;
-    sku: string;
     product_title: string;
     product_slug: string;
     price: string;

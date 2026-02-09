@@ -51,10 +51,6 @@ const formattedPrice = computed(() => {
 
 			<div class="flex-1 flex flex-col justify-between py-0.5">
 				<div>
-					<span class="block font-sans text-[10px] uppercase tracking-widest text-gallery-400 mb-1">
-            {{ item.variant.sku }}
-          </span>
-
 					<h3 class="font-serif text-lg text-gallery-900 leading-tight mb-1">
 						<NuxtLink :to="`/product/${item.variant.product_slug}`" class="hover:text-clay-600 transition-colors">
 							{{ item.variant.product_title }}
